@@ -1,5 +1,15 @@
+import FirstLesson.Task1;
+import FirstLesson.Task2;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        //Task1.firstException();
+        //Task1.secondException();
+        //Task1.thirdException();
+
+        Task2.testTask();
+
+
     }
 }
