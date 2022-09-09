@@ -18,8 +18,8 @@ public class Task3 {
                 System.out.println(item);
             }
         }
-        catch (RuntimeException ex) {
-            System.err.println(ex.getMessage());
+        catch (Exception ex) {
+            System.err.println(ex);
         }
 
         try {
@@ -29,8 +29,8 @@ public class Task3 {
                 System.out.println(item);
             }
         }
-        catch (RuntimeException ex) {
-            System.err.println(ex.getMessage());
+        catch (Exception ex) {
+            System.err.println(ex);
         }
 
         try {
@@ -40,8 +40,8 @@ public class Task3 {
                 System.out.println(item);
             }
         }
-        catch (RuntimeException ex) {
-            System.err.println(ex.getMessage());
+        catch (Exception ex) {
+            System.err.println(ex);
         }
 
         try {
@@ -51,8 +51,8 @@ public class Task3 {
                 System.out.println(item);
             }
         }
-        catch (RuntimeException ex) {
-            System.err.println(ex.getMessage());
+        catch (Exception ex) {
+            System.err.println(ex);
         }
     }
 
@@ -62,13 +62,13 @@ public class Task3 {
      * @param secondArray целочисленный массив - вычитаемое
      * @return целочисленный массив - разность
      */
-    private static int[] arrayDifference(int[] firstArray, int[] secondArray) throws RuntimeException {
+    private static int[] arrayDifference(int[] firstArray, int[] secondArray) {
         if (firstArray == null || secondArray == null) {
-            throw new RuntimeException("Один из массивов равен null!");
+            throw new NullPointerException("Один из массивов равен null!");
         }
 
         if (firstArray.length != secondArray.length) {
-            throw new RuntimeException("Массивы разной длины!");
+            throw new IllegalArgumentException("Массивы разной длины!");
         }
 
         int[] difference = new int[firstArray.length];
