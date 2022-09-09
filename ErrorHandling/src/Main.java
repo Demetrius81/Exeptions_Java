@@ -1,5 +1,6 @@
 import FirstLesson.Task1;
 import FirstLesson.Task2;
+import FirstLesson.Task3;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,8 +9,8 @@ public class Main {
         //Task1.secondException();
         //Task1.thirdException();
 
-        Task2.testTask();
+        //Task2.testTask();
 
-
+        Task3.testTask();
     }
 }
