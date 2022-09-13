@@ -1,7 +1,7 @@
-import FirstLesson.Task1;
-import FirstLesson.Task2;
-import FirstLesson.Task3;
-import FirstLesson.Task4;
+import SecondLesson.Task1;
+import SecondLesson.Task2;
+import SecondLesson.Task3;
+import SecondLesson.Task4;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,6 +14,22 @@ public class Main {
 
         //Task3.testTask();
 
-        Task4.testTask();
+        //Task4.testTask();
+
+        Task1.readFloat();
+
+        Task2.someCode();
+
+        try {
+            Task3.main(null);
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
+        }
+
+        try {
+            Task4.readString();
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
+        }
     }
 }
