@@ -23,7 +23,7 @@ public class User {
     /**
      * Номер телефона.
      */
-    private int phoneNumber;
+    private long phoneNumber;
     /**
      * Пол.
      */
@@ -61,11 +61,11 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -77,36 +77,77 @@ public class User {
         this.sex = sex;
     }
 
-    public User(String user) throws BadDataException {
-        user.replace("><", " ");
-        user.replace('<', ' ');
-        user.replace('>', ' ');
-        user.trim();
-        String[] userArr = user.split(" ");
+    public User createModel(String userString) throws BadDataException {
+        userString = userString.replace(" ", "");
+        userString = userString.replace("><", " ");
+        userString = userString.replace('<', ' ');
+        userString = userString.replace('>', ' ');
+        userString = userString.trim();
+        String[] userArr = userString.split(" ");
+
         if (userArr.length != 6) {
-            throw new BadDataException("Не совпадает количество введенных данных");
+            throw new BadDataException("Не совпадает количество введенных данных, хранящихся в файле.");
         }
+
         lastName = userArr[0];
         firstName = userArr[1];
         middleName = userArr[2];
         dateOfBirth = userArr[3];
         try {
-            phoneNumber = Integer.parseInt(userArr[4]);
-        } catch (NumberFormatException ex){
-            throw new BadDataException("Неверный формат телефонного номера");
+            phoneNumber = Long.parseLong(userArr[4]);
+        } catch (NumberFormatException ex) {
+            throw new BadDataException(ex.getMessage());
         }
         sex = userArr[5];
+        return this;
+    }
 
+    public User createModel(String[] userArr) throws BadDataException {
+        if (userArr.length != 6) {
+            throw new BadDataException("Не совпадает количество введенных данных, хранящихся в файле.");
+        }
 
+        lastName = userArr[0];
+        firstName = userArr[1];
+        middleName = userArr[2];
+        dateOfBirth = userArr[4];
+        if (userArr[3].contains("-")) {
+            throw new BadDataException("Номер телефона не может начинаться с символа \"-\".");
+        } else if (userArr[3].length() > 15) {
+            throw new BadDataException("Номер телефона не может содержать более 15 цифр.");
+        } else {
+            try {
+                phoneNumber = Long.parseLong(userArr[3]);
+            } catch (NumberFormatException ex) {
+                throw new BadDataException(ex.getMessage());
+            }
+        }
+        sex = userArr[5];
+        return this;
     }
 
     @Override
     public String toString() {
-        return '<' + firstName + '>' +
-                '<' + lastName + '>' +
-                '<' + middleName + '>' +
-                '<' + dateOfBirth + '>' +
-                '<' + phoneNumber + '>' +
-                '<' + sex + '>';
+        return "Пользователь{" +
+                "Имя='" + firstName + '\'' +
+                ", Фамилия='" + lastName + '\'' +
+                ", Отчество='" + middleName + '\'' +
+                ", Дата рождения='" + dateOfBirth + '\'' +
+                ", Номер телефона=" + phoneNumber +
+                ", Пол='" + sex + '\'' +
+                '}';
+    }
+
+    public String toFileString() throws NullPointerException {
+        if (this != null) {
+            return '<' + lastName + '>' +
+                    '<' + firstName + '>' +
+                    '<' + middleName + '>' +
+                    '<' + dateOfBirth + '>' + " " +
+                    '<' + phoneNumber + '>' +
+                    '<' + sex + '>';
+        } else {
+            throw new NullPointerException("Модель равна null.");
+        }
     }
 }
